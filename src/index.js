@@ -1,5 +1,6 @@
 import TodoList from './controller/TodoList.js';
 import DOMrender from './view/DOMrender.js';
+import './style.css';
 
 DOMrender.suscribe();
 
