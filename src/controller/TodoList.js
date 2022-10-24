@@ -1,5 +1,6 @@
 import PubSub from 'pubsub-js';
 import createTask from '../model/Task';
+import { isToday, isThisWeek } from 'date-fns';
 
 const tasks = [];
 const projectsNames = [];
@@ -20,11 +21,15 @@ const TodoList = {
 	},
 
 	getToday() {
+		const filtered = tasks.filter((task) => isToday(task.dueDate));
+
 		PubSub.publish('Get Tasks Of Today', filtered);
 		return filtered;
 	},
 
 	getThisWeek() {
+		const filtered = tasks.filter((task) => isThisWeek(task.dueDate));
+
 		PubSub.publish('Get Tasks Of This Week', filtered);
 		return filtered;
 	},

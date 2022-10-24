@@ -4,21 +4,10 @@ import './style.css';
 
 DOMwriter.suscribe();
 
-const task1 = TodoList.makeTask('Paolo', '22/10/2028', 'high', 'work');
-const task2 = TodoList.makeTask('Andrea', '22/10/2023', 'low', 'home');
-const task3 = TodoList.makeTask('Gianni', '22/12/2020', 'medium', 'work');
-const task4 = TodoList.makeTask('Francesco', '22/10/1990', 'high', 'fitness');
-const task5 = TodoList.makeTask('Apple', '22/10/2028', 'low', 'musica');
-
-console.log(task1, task2, task3, task4, task5);
+const task1 = TodoList.makeTask('Paolo', '2028/10/28', 'high', 'work');
+const task2 = TodoList.makeTask('Andrea', '2022/10/24', 'low', 'home');
+const task3 = TodoList.makeTask('Gianni', '2020/12/30', 'medium', 'work');
+const task4 = TodoList.makeTask('Francesco', '1990/10/22', 'high', 'fitness');
+const task5 = TodoList.makeTask('Apple', '2028/11/14', 'low', 'musica');
 
 TodoList.getAll();
-
-TodoList.getByProject('work');
-
-const task = TodoList.getByID(0);
-
-TodoList.deleteTask(task5.id);
-TodoList.getAll();
-
-task1.toggleIsDone();

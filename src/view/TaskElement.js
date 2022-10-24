@@ -1,5 +1,8 @@
+import { format } from 'date-fns';
+
 const createTaskElement = (task) => {
 	const container = document.createElement('div');
+	container.setAttribute('data-id', task.id);
 	container.className = `task ${task.priority}`;
 
 	const checkbox = document.createElement('input');
@@ -11,7 +14,7 @@ const createTaskElement = (task) => {
 
 	const dueDate = document.createElement('div');
 	dueDate.className = 'task-dueDate';
-	dueDate.textContent = task.dueDate;
+	dueDate.textContent = format(task.dueDate, 'dd/MM/yyyy');
 
 	const editButton = document.createElement('button');
 	editButton.innerHTML =

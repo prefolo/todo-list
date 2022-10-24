@@ -8,7 +8,7 @@ function createTask(title, dueDate, priority, projectName, isDone = false) {
 
 	return {
 		title,
-		dueDate,
+		dueDate: new Date(dueDate),
 		priority,
 		projectName,
 		isDone,

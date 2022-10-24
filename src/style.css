@@ -8,11 +8,19 @@ button{
 }
 
 :root{
+    --body-bg-color:#fff;
     --header-title-color:#555;
+    --header-border-bottom-color:#ddd;
     --sidebar-bg-color:#e6f5f9;
     --sidebar-selection-bg-color:rgb(255, 127, 0);
     --sidebar-selection-color:#fff;
     --sidebar-border-right-color:#bde3ff;
+    --main-content-bg-color:#fff;
+    --task-shadow-color: #eee;
+    --task-high-priority-bg-color:rgb(255, 207, 144);
+    --task-medium-priority-bg-color: rgb(247, 255, 166);
+    --task-low-priority-bg-color:rgb(149, 255, 228);
+    --task-dueDate-color:rgb(69, 69, 69);
     --footer-color:#5781ba;
 }
 
@@ -23,7 +31,10 @@ body{
     display: grid;
     grid-template-columns: 300px 1fr;
     grid-template-rows: 60px 1fr 30px;
+    background-color: var(--body-bg-color);
 }
+
+/* header */
 
 #header{
     grid-column: 1/3;
@@ -31,13 +42,15 @@ body{
     gap:10px;
     align-items: center;
     padding: 20px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--header-border-bottom-color);
 }
 
 #header > h1 {
     font-weight: 300;
     color: var(--header-title-color);
 }
+
+/* sidebar */
 
 #sidebar{
     background-color: var(--sidebar-bg-color);
@@ -60,9 +73,12 @@ body{
     color: var(--sidebar-selection-color);
 }
 
+
+/* Task */
+
 #main-content{
     padding:20px;
-    background-color: rgb(85, 85, 85);
+    background-color: var(--main-content-bg-color);
 }
 
 .task{
@@ -73,19 +89,19 @@ body{
     padding: 5px 10px;
     border-radius: 5px;
     margin-bottom: 14px;
-    box-shadow: 0 4px 4px #333;
+    box-shadow: 0 4px 4px var(--task-shadow-color);
 }
 
 .task.high{
-    background-color: rgb(255, 207, 144);
+    background-color: var(--task-high-priority-bg-color);
 }
 
 .task.medium{
-    background-color: rgb(247, 255, 166);
+    background-color: var(--task-medium-priority-bg-color);
 }
 
 .task.low{
-    background-color: rgb(149, 255, 228);
+    background-color: var(--task-low-priority-bg-color);
 }
 
 .task button{
@@ -95,8 +111,10 @@ body{
 
 .task-dueDate{
     font-size: 14px;
-    color: rgb(69, 69, 69);
+    color: var(--task-dueDate-color);
 }
+
+/* footer */
 
 #footer{
     grid-column: 1/3;

@@ -3,16 +3,7 @@ import createTaskElement from './TaskElement.js';
 
 let isSubscribed = false;
 
-const showAllTasks = (msg, tasks) => {
-	const mainContent = document.querySelector('#main-content');
-	mainContent.innerHTML = '';
-
-	tasks.forEach((task) => {
-		mainContent.appendChild(createTaskElement(task));
-	});
-};
-
-const showTasksByProject = (msg, tasks) => {
+const showTasks = (msg, tasks) => {
 	const mainContent = document.querySelector('#main-content');
 	mainContent.innerHTML = '';
 
@@ -47,8 +38,9 @@ const DOMwriter = {
 	suscribe() {
 		if (isSubscribed) return;
 
-		PubSub.subscribe('Get All Tasks', showAllTasks);
-		PubSub.subscribe('Get Tasks By Project', showTasksByProject);
+		PubSub.subscribe('Get All Tasks', showTasks);
+		PubSub.subscribe('Get Tasks Of Today', showTasks);
+		PubSub.subscribe('Get Tasks By Project', showTasks);
 		PubSub.subscribe('Get Task By ID', showTaskByID);
 		PubSub.subscribe('Make Task', addNewTask);
 		PubSub.subscribe('Delete Task', deleteTask);
