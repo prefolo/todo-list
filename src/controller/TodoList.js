@@ -19,6 +19,16 @@ const TodoList = {
 		return filtered;
 	},
 
+	getToday() {
+		PubSub.publish('Get Tasks Of Today', filtered);
+		return filtered;
+	},
+
+	getThisWeek() {
+		PubSub.publish('Get Tasks Of This Week', filtered);
+		return filtered;
+	},
+
 	getByID(id) {
 		const filtered = tasks.filter((task) => task.id == id);
 
@@ -34,7 +44,7 @@ const TodoList = {
 
 		PubSub.publish('Make Task', task);
 
-		return task.id;
+		return task;
 	},
 
 	deleteTask(id) {
@@ -43,7 +53,7 @@ const TodoList = {
 
 		if (index > -1) tasks.splice(index, 1);
 
-		PubSub.publish('Delete Task', task);
+		PubSub.publish('Delete Task', id);
 	},
 
 	makeProject(projectName) {
