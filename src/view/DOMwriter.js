@@ -1,5 +1,6 @@
 import PubSub from 'pubsub-js';
 import createTaskElement from './TaskElement.js';
+import createProjectElement from './ProjectElement.js';
 
 let isSubscribed = false;
 
@@ -27,7 +28,9 @@ const deleteTask = (msg, id) => {
 };
 
 const addNewProject = (msg, projectName) => {
-	console.log(msg, projectName);
+	document
+		.querySelector('#projects-container')
+		.appendChild(createProjectElement(projectName));
 };
 
 const styleTaskDependingOnIsDone = (msg, data) => {
