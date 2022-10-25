@@ -24,7 +24,7 @@ const addNewTask = (msg, task) => {
 };
 
 const deleteTask = (msg, id) => {
-	console.log(msg, id);
+	document.querySelector('#task-' + id).remove();
 };
 
 const addNewProject = (msg, projectName) => {
@@ -39,7 +39,10 @@ const addNewProject = (msg, projectName) => {
 };
 
 const styleTaskDependingOnIsDone = (msg, data) => {
-	console.log(msg, data);
+	const titleElement = document.querySelector('#task-title-' + data.id);
+
+	if (data.isDone) titleElement.style = 'text-decoration: line-through';
+	else titleElement.style = 'text-decoration: none';
 };
 
 const DOMwriter = {

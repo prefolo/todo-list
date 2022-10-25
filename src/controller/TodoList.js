@@ -14,6 +14,10 @@ const TodoList = {
 			this.getByProject(projectName)
 		);
 
+		PubSub.subscribe('Clicked Delete Button Of Task', (msg, id) =>
+			this.deleteTask(id)
+		);
+
 		isSubscribed = true;
 	},
 

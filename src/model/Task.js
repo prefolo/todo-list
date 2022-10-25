@@ -15,7 +15,9 @@ function createTask(title, dueDate, priority, projectName, isDone = false) {
 		id,
 
 		toggleIsDone() {
-			isDone = !isDone;
+			this.isDone = !this.isDone;
+			const isDone = this.isDone;
+
 			PubSub.publish('Toggle isDone of task', { id, isDone });
 		},
 	};
