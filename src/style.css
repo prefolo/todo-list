@@ -76,6 +76,14 @@ body{
     color: var(--sidebar-selection-color);
 }
 
+.menu-item svg {
+    color: rgb(113, 164, 255);
+}
+
+.menu-item.selected svg {
+    color: #fff;
+}
+
 #projects-bar {
     background-color: #FFF;
     margin-top: 10px;
@@ -127,14 +135,12 @@ body{
 
 #main-content-toolbar{
     grid-column: 2/3;
-    background-color: #f4f4f4;
     display: flex;
     align-items: center;
     padding-left:20px;
     padding: 0 20px;
     gap: 15px;
     justify-content: space-between;
-    box-shadow: 0px 4px 4px #eee;
     z-index: 1;
 }
 
