@@ -3,6 +3,7 @@ import DOMwriter from './view/DOMwriter.js';
 import './style.css';
 
 DOMwriter.suscribe();
+TodoList.subscribe();
 
 const task1 = TodoList.makeTask('Paolo', '2028/10/28', 'high', 'work');
 const task2 = TodoList.makeTask('Andrea', '2022/10/24', 'low', 'home');

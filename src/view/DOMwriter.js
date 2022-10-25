@@ -1,7 +1,6 @@
 import PubSub from 'pubsub-js';
 import createTaskElement from './TaskElement.js';
 import createProjectElement from './ProjectElement.js';
-import TodoList from '../controller/TodoList.js';
 
 let isSubscribed = false;
 
@@ -35,7 +34,7 @@ const addNewProject = (msg, projectName) => {
 
 	element.addEventListener('click', function () {
 		DOMwriter.selectMenuItem(this);
-		TodoList.getByProject(projectName);
+		PubSub.publish('Clicked Project Menu Item', projectName);
 	});
 };
 

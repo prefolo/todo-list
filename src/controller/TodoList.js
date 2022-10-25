@@ -4,8 +4,19 @@ import { isToday, isThisWeek } from 'date-fns';
 
 const tasks = [];
 const projectsNames = [];
+let isSubscribed = false;
 
 const TodoList = {
+	subscribe() {
+		if (isSubscribed) return;
+
+		PubSub.subscribe('Clicked Project Menu Item', (msg, projectName) =>
+			this.getByProject(projectName)
+		);
+
+		isSubscribed = true;
+	},
+
 	getAll() {
 		PubSub.publish('Get All Tasks', tasks);
 		return tasks;
