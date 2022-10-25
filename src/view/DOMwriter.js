@@ -39,10 +39,10 @@ const addNewProject = (msg, projectName) => {
 };
 
 const styleTaskDependingOnIsDone = (msg, data) => {
-	const titleElement = document.querySelector('#task-title-' + data.id);
+	const taskElement = document.querySelector('#task-' + data.id);
 
-	if (data.isDone) titleElement.style = 'text-decoration: line-through';
-	else titleElement.style = 'text-decoration: none';
+	if (data.isDone) taskElement.classList.add('isDone');
+	else taskElement.classList.remove('isDone');
 };
 
 const DOMwriter = {

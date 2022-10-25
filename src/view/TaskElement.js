@@ -5,12 +5,16 @@ const createTaskElement = (task) => {
 	const container = document.createElement('div');
 	container.className = `task ${task.priority}`;
 	container.id = `task-${task.id}`;
+	if (task.isDone) container.classList.add('isDone');
 
 	const checkbox = document.createElement('input');
 	checkbox.setAttribute('type', 'checkbox');
+	if (task.isDone) checkbox.setAttribute('checked', 'checked');
 
 	checkbox.addEventListener('click', function () {
+		console.log(task.isDone);
 		task.toggleIsDone();
+		console.log(task.isDone);
 	});
 
 	const title = document.createElement('div');
