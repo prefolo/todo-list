@@ -20,8 +20,19 @@ button{
     --task-high-priority-bg-color:rgb(255, 207, 144);
     --task-medium-priority-bg-color: rgb(247, 255, 166);
     --task-low-priority-bg-color:rgb(149, 255, 228);
-    --task-dueDate-color:rgb(69, 69, 69);
     --footer-color:#5781ba;
+    --menu-item-icon-color:rgb(113, 164, 255);
+    --menu-item-selected-icon-color:#fff;
+    --projects-bar-bg-color:#fff;
+    --projects-bar-color:#888;
+    --regular-button-bg-color:rgb(76, 158, 217);
+    --regular-button-color:#fff;
+    --regular-button-pressed-bg-color: rgb(60, 125, 171);
+    --main-content-toolbar-color:#888;
+    --task-high-border-color: rgb(255, 159, 0);
+    --task-medium-border-color:rgb(226, 226, 0);
+    --task-low-border-color:rgb(168,215,168);
+    --task-isDone-color:rgba(0, 0, 0, 0.5);
 }
 
 body{
@@ -65,10 +76,11 @@ body{
 
 .menu-item {
     display: flex;
-    gap: 5px;
+    gap: 10px;
     align-items: center;
     padding: 4px 12px;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .menu-item.selected {
@@ -77,34 +89,35 @@ body{
 }
 
 .menu-item svg {
-    color: rgb(113, 164, 255);
+    color: var(--menu-item-icon-color);
 }
 
 .menu-item.selected svg {
-    color: #fff;
+    color: var(--menu-item-selected-icon-color);
 }
 
 #projects-bar {
-    background-color: #FFF;
+    background-color: var(--projects-bar-bg-color);
     margin-top: 10px;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
     padding: 6px 12px;
     display: flex;
     justify-content: space-between;
+    color:var(--projects-bar-color);
 }
 
 #projects-bar button, #main-content-toolbar button {
     border: 0;
-    background-color: rgb(76, 158, 217);
+    background-color: var(--regular-button-bg-color);
     padding: 2px 10px;
     border-radius: 100px;
-    color: #fff;
+    color: var(--regular-button-color);
     line-height: 14px;
 }
 
 #projects-bar button:active, #main-content-toolbar button:active {
-    background-color: rgb(60, 125, 171);
+    background-color: var(--regular-button-pressed-bg-color);
 }
 
 #projects-container{
@@ -146,7 +159,7 @@ body{
 
 #toolbar-text{
     font-size: 14px;
-    color: #888;
+    color: var(--main-content-toolbar-color);
 }
 
 .task{
@@ -158,18 +171,22 @@ body{
     border-radius: 5px;
     margin-bottom: 14px;
     box-shadow: 0 4px 4px var(--task-shadow-color);
-}
-
-.task.high{
-    background-color: var(--task-high-priority-bg-color);
-}
-
-.task.medium{
-    background-color: var(--task-medium-priority-bg-color);
+    border: 2px solid #ccc;
 }
 
 .task.low{
     background-color: var(--task-low-priority-bg-color);
+    border-color: var(--task-low-border-color);
+}
+
+.task.medium{
+    background-color: var(--task-medium-priority-bg-color);
+    border-color: var(--task-medium-border-color);
+}
+
+.task.high{
+    background-color: var(--task-high-priority-bg-color);
+    border-color:var(--task-high-border-color);
 }
 
 .task button{
@@ -179,12 +196,10 @@ body{
 
 .task-dueDate{
     font-size: 14px;
-    color: var(--task-dueDate-color);
 }
 
 .task.isDone{
-    color: #888;
-    background-color: #f8f8f8;
+    color: var(--task-isDone-color);
 }
 
 .task.isDone .task-title{

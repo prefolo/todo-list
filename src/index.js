@@ -5,11 +5,35 @@ import './style.css';
 DOMwriter.suscribe();
 TodoList.subscribe();
 
-const task1 = TodoList.makeTask('Paolo', '2028/10/28', 'high', 'work');
-const task2 = TodoList.makeTask('Andrea', '2022/10/24', 'low', 'home');
-const task3 = TodoList.makeTask('Gianni', '2020/12/30', 'medium', 'work');
-const task4 = TodoList.makeTask('Francesco', '1990/10/22', 'high', 'fitness');
-const task5 = TodoList.makeTask('Apple', '2028/11/14', 'low', 'musica');
+const task1 = TodoList.makeTask('Wash the car', '2022/10/28', 'low', 'Home');
+
+const task2 = TodoList.makeTask(
+	'Finish development of restaurant website',
+	'2022/10/24',
+	'high',
+	'Work'
+);
+
+const task3 = TodoList.makeTask(
+	'Preparing the christmas tree',
+	'2022/12/20',
+	'medium',
+	'Events'
+);
+
+const task4 = TodoList.makeTask(
+	'Pay the electricity bill',
+	'2023/01/22',
+	'high',
+	'Home'
+);
+
+const task5 = TodoList.makeTask(
+	"Buy a gift for Paolo's birthday",
+	'2023/02/14',
+	'high',
+	'Events'
+);
 
 TodoList.getAll();
 
