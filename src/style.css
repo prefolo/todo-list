@@ -61,29 +61,26 @@ body{
     flex-direction: column;
 }
 
-#sidebar>div {
+.menu-item {
     display: flex;
     gap: 5px;
     align-items: center;
     padding: 4px 12px;
     cursor: pointer;
-    border-radius: 4px;
-    margin: 0 14px;
 }
 
-#sidebar>div.selected, #projects-container>div.selected {
+.menu-item.selected {
     background-color: var(--sidebar-selection-bg-color);
     color: var(--sidebar-selection-color);
 }
 
-#sidebar #projects-bar {
+#projects-bar {
     background-color: #FFF;
-    margin: 0;
-    border-radius: 0;
     margin-top: 10px;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;
     padding: 6px 12px;
+    display: flex;
     justify-content: space-between;
 }
 
@@ -100,24 +97,22 @@ body{
     background-color: rgb(60, 125, 171);
 }
 
-#sidebar #projects-container{
+#projects-container{
     flex:1;
     padding:0;
     padding-top:5px;
     margin:0;
     overflow-y: scroll;
-    flex-direction: column;
-    align-items: flex-start;
 }
 
-#projects-container > div {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    padding: 4px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin: 0 14px;
+#projects-container .menu-item {
+    padding: 4px 22px;
+}
+
+#projects-container .menu-item-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Task */
