@@ -30,7 +30,7 @@ body{
     height: 100vh;
     display: grid;
     grid-template-columns: 300px 1fr;
-    grid-template-rows: 60px 1fr 30px;
+    grid-template-rows: 60px 34px 1fr 30px;
     background-color: var(--body-bg-color);
 }
 
@@ -53,6 +53,8 @@ body{
 /* sidebar */
 
 #sidebar{
+    grid-row: 2/4;
+
     background-color: var(--sidebar-bg-color);
     padding-top: 5px;
     border-right: 1px solid var(--sidebar-border-right-color);
@@ -84,7 +86,7 @@ body{
     justify-content: space-between;
 }
 
-#projects-bar button {
+#projects-bar button, #main-content-toolbar button {
     border: 0;
     background-color: rgb(76, 158, 217);
     padding: 2px 10px;
@@ -93,7 +95,7 @@ body{
     line-height: 14px;
 }
 
-#projects-bar button:active {
+#projects-bar button:active, #main-content-toolbar button:active {
     background-color: rgb(60, 125, 171);
 }
 
@@ -120,6 +122,25 @@ body{
 #main-content{
     padding:20px;
     background-color: var(--main-content-bg-color);
+    overflow-y: scroll;
+}
+
+#main-content-toolbar{
+    grid-column: 2/3;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    padding-left:20px;
+    padding: 0 20px;
+    gap: 15px;
+    justify-content: space-between;
+    box-shadow: 0px 4px 4px #eee;
+    z-index: 1;
+}
+
+#toolbar-text{
+    font-size: 14px;
+    color: #888;
 }
 
 .task{
