@@ -1,6 +1,7 @@
 import PubSub from 'pubsub-js';
 import createTaskElement from './TaskElement.js';
 import createProjectElement from './ProjectElement.js';
+import TodoList from '../controller/TodoList.js';
 
 let isSubscribed = false;
 
@@ -28,9 +29,14 @@ const deleteTask = (msg, id) => {
 };
 
 const addNewProject = (msg, projectName) => {
-	document
-		.querySelector('#projects-container')
-		.appendChild(createProjectElement(projectName));
+	const element = createProjectElement(projectName);
+
+	document.querySelector('#projects-container').appendChild(element);
+
+	element.addEventListener('click', function () {
+		DOMwriter.selectMenuItem(this);
+		TodoList.getByProject(projectName);
+	});
 };
 
 const styleTaskDependingOnIsDone = (msg, data) => {
@@ -43,6 +49,7 @@ const DOMwriter = {
 
 		PubSub.subscribe('Get All Tasks', showTasks);
 		PubSub.subscribe('Get Tasks Of Today', showTasks);
+		PubSub.subscribe('Get Tasks Of This Week', showTasks);
 		PubSub.subscribe('Get Tasks By Project', showTasks);
 		PubSub.subscribe('Get Task By ID', showTaskByID);
 		PubSub.subscribe('Make Task', addNewTask);
@@ -51,6 +58,14 @@ const DOMwriter = {
 		PubSub.subscribe('Toggle isDone of task', styleTaskDependingOnIsDone);
 
 		isSubscribed = true;
+	},
+
+	selectMenuItem(menuItem) {
+		document
+			.querySelectorAll('.menu-item')
+			.forEach((item) => item.classList.remove('selected'));
+
+		menuItem.classList.add('selected');
 	},
 };
 

@@ -31,6 +31,7 @@ const TodoList = {
 		const filtered = tasks.filter((task) => isThisWeek(task.dueDate));
 
 		PubSub.publish('Get Tasks Of This Week', filtered);
+		console.log(filtered);
 		return filtered;
 	},
 
