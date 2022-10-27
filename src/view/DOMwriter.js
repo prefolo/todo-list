@@ -5,8 +5,7 @@ import { format } from 'date-fns';
 
 let isSubscribed = false;
 
-const showTasks = (msg, tasks) => {
-	console.log('showTasks', tasks);
+const insertTasksToMainContent = (tasks) => {
 	const mainContent = document.querySelector('#main-content');
 	mainContent.innerHTML = '';
 
@@ -15,8 +14,36 @@ const showTasks = (msg, tasks) => {
 	});
 };
 
-const showTaskByID = (msg, task) => {
-	console.log(msg, task);
+const showAllTasks = (msg, tasks) => {
+	insertTasksToMainContent(tasks);
+
+	document.querySelector(
+		'#toolbar-text'
+	).textContent = `All > ${tasks.length} todos`;
+};
+
+const showTodayTasks = (msg, tasks) => {
+	insertTasksToMainContent(tasks);
+
+	document.querySelector(
+		'#toolbar-text'
+	).textContent = `Today > ${tasks.length} todos`;
+};
+
+const showThisWeekTasks = (msg, tasks) => {
+	insertTasksToMainContent(tasks);
+
+	document.querySelector(
+		'#toolbar-text'
+	).textContent = `This Week > ${tasks.length} todos`;
+};
+
+const showProjectTasks = (msg, { projectName, tasks }) => {
+	insertTasksToMainContent(tasks);
+
+	document.querySelector(
+		'#toolbar-text'
+	).textContent = `Project: ${projectName} > ${tasks.length} todos`;
 };
 
 const addNewTask = (msg, task) => {
@@ -71,11 +98,10 @@ const DOMwriter = {
 	suscribe() {
 		if (isSubscribed) return;
 
-		PubSub.subscribe('Get All Tasks', showTasks);
-		PubSub.subscribe('Get Tasks Of Today', showTasks);
-		PubSub.subscribe('Get Tasks Of This Week', showTasks);
-		PubSub.subscribe('Get Tasks By Project', showTasks);
-		PubSub.subscribe('Get Task By ID', showTaskByID);
+		PubSub.subscribe('Get All Tasks', showAllTasks);
+		PubSub.subscribe('Get Tasks Of Today', showTodayTasks);
+		PubSub.subscribe('Get Tasks Of This Week', showThisWeekTasks);
+		PubSub.subscribe('Get Tasks By Project', showProjectTasks);
 		PubSub.subscribe('Make Task', addNewTask);
 		PubSub.subscribe('Delete Task', deleteTask);
 		PubSub.subscribe('Make Project', addNewProject);

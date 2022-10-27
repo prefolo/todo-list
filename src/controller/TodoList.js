@@ -35,7 +35,10 @@ const TodoList = {
 			(task) => task.projectName == projectName
 		);
 
-		PubSub.publish('Get Tasks By Project', filtered);
+		PubSub.publish('Get Tasks By Project', {
+			projectName,
+			tasks: filtered,
+		});
 		return filtered;
 	},
 
@@ -58,8 +61,6 @@ const TodoList = {
 
 	getByID(id) {
 		const filtered = tasks.filter((task) => task.id == id);
-
-		PubSub.publish('Get Task By ID', filtered[0]);
 		return filtered[0];
 	},
 
