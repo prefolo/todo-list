@@ -14,36 +14,28 @@ const insertTasksToMainContent = (tasks) => {
 	});
 };
 
+const logToolbarInfo = (str) => {
+	document.querySelector('#toolbar-text').textContent = str;
+};
+
 const showAllTasks = (msg, tasks) => {
 	insertTasksToMainContent(tasks);
-
-	document.querySelector(
-		'#toolbar-text'
-	).textContent = `All > ${tasks.length} todos`;
+	logToolbarInfo(`All > ${tasks.length} todos`);
 };
 
 const showTodayTasks = (msg, tasks) => {
 	insertTasksToMainContent(tasks);
-
-	document.querySelector(
-		'#toolbar-text'
-	).textContent = `Today > ${tasks.length} todos`;
+	logToolbarInfo(`Today > ${tasks.length} todos`);
 };
 
 const showThisWeekTasks = (msg, tasks) => {
 	insertTasksToMainContent(tasks);
-
-	document.querySelector(
-		'#toolbar-text'
-	).textContent = `This Week > ${tasks.length} todos`;
+	logToolbarInfo(`This Week > ${tasks.length} todos`);
 };
 
 const showProjectTasks = (msg, { projectName, tasks }) => {
 	insertTasksToMainContent(tasks);
-
-	document.querySelector(
-		'#toolbar-text'
-	).textContent = `Project: ${projectName} > ${tasks.length} todos`;
+	logToolbarInfo(`Project: ${projectName} > ${tasks.length} todos`);
 };
 
 const addNewTask = (msg, task) => {
@@ -52,8 +44,13 @@ const addNewTask = (msg, task) => {
 		.appendChild(createTaskElement(task));
 };
 
-const deleteTask = (msg, id) => {
+const deleteTask = (msg, { id, tasks }) => {
 	document.querySelector('#task-' + id).remove();
+
+	const infoText = document.querySelector('#toolbar-text').textContent;
+	const a = infoText.split('>')[0];
+
+	logToolbarInfo(`${a} > ${tasks.length} todos`);
 };
 
 const addNewProject = (msg, { projectName, projectsNames }) => {

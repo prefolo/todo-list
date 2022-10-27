@@ -115,7 +115,7 @@ const TodoList = {
 
 		if (index > -1) tasks.splice(index, 1);
 
-		PubSub.publish('Delete Task', id);
+		PubSub.publish('Delete Task', { id, tasks });
 	},
 
 	makeProject(projectName) {
