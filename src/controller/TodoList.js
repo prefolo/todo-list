@@ -1,8 +1,8 @@
 import PubSub from 'pubsub-js';
-import createTask from '../model/Task';
+import createTodo from '../model/Todo';
 import { isToday, isThisWeek } from 'date-fns';
 
-const tasks = [];
+const todos = [];
 const projectsNames = [];
 let isSubscribed = false;
 let currentList = 'all';
@@ -15,8 +15,8 @@ const TodoList = {
 			this.getByProject(projectName)
 		);
 
-		PubSub.subscribe('Clicked Delete Button Of Task', (msg, id) =>
-			this.deleteTask(id)
+		PubSub.subscribe('Clicked Delete Button Of Todo', (msg, id) =>
+			this.deleteTodo(id)
 		);
 
 		isSubscribed = true;
@@ -24,65 +24,65 @@ const TodoList = {
 
 	getAll() {
 		currentList = 'all';
-		PubSub.publish('Get All Tasks', tasks);
-		return tasks;
+		PubSub.publish('Get All Todos', todos);
+		return todos;
 	},
 
 	getByProject(projectName) {
 		currentList = projectName;
 
-		const filtered = tasks.filter(
-			(task) => task.projectName == projectName
+		const filtered = todos.filter(
+			(todo) => todo.projectName == projectName
 		);
 
-		PubSub.publish('Get Tasks By Project', {
+		PubSub.publish('Get Todos By Project', {
 			projectName,
-			tasks: filtered,
+			todos: filtered,
 		});
 		return filtered;
 	},
 
 	getToday() {
 		currentList = 'today';
-		const filtered = tasks.filter((task) => isToday(task.dueDate));
+		const filtered = todos.filter((todo) => isToday(todo.dueDate));
 
-		PubSub.publish('Get Tasks Of Today', filtered);
+		PubSub.publish('Get Todos Of Today', filtered);
 		return filtered;
 	},
 
 	getThisWeek() {
 		currentList = 'thisWeek';
-		const filtered = tasks.filter((task) => isThisWeek(task.dueDate));
+		const filtered = todos.filter((todo) => isThisWeek(todo.dueDate));
 
-		PubSub.publish('Get Tasks Of This Week', filtered);
+		PubSub.publish('Get Todos Of This Week', filtered);
 		console.log(filtered);
 		return filtered;
 	},
 
 	getByID(id) {
-		const filtered = tasks.filter((task) => task.id == id);
+		const filtered = todos.filter((todo) => todo.id == id);
 		return filtered[0];
 	},
 
-	makeTask(title, dueDate, priority, projectName) {
-		const task = createTask(title, dueDate, priority, projectName);
-		tasks.push(task);
+	makeTodo(title, dueDate, priority, projectName) {
+		const todo = createTodo(title, dueDate, priority, projectName);
+		todos.push(todo);
 
 		this.makeProject(projectName);
 
-		PubSub.publish('Make Task', task);
+		PubSub.publish('Make Todo', todo);
 
-		return task;
+		return todo;
 	},
 
-	updateTask(id, title, dueDate, priority, projectName) {
+	updateTodo(id, title, dueDate, priority, projectName) {
 		console.log({ id, title, dueDate, priority, projectName });
-		const task = this.getByID(id);
+		const todo = this.getByID(id);
 
-		task.title = title;
-		task.dueDate = new Date(dueDate);
-		task.priority = priority;
-		task.projectName = projectName;
+		todo.title = title;
+		todo.dueDate = new Date(dueDate);
+		todo.priority = priority;
+		todo.projectName = projectName;
 
 		this.makeProject(projectName);
 
@@ -109,13 +109,13 @@ const TodoList = {
 		}
 	},
 
-	deleteTask(id) {
-		const task = tasks.filter((task) => task.id == id)[0];
-		const index = tasks.indexOf(task);
+	deleteTodo(id) {
+		const todo = todos.filter((todo) => todo.id == id)[0];
+		const index = todos.indexOf(todo);
 
-		if (index > -1) tasks.splice(index, 1);
+		if (index > -1) todos.splice(index, 1);
 
-		PubSub.publish('Delete Task', { id, tasks });
+		PubSub.publish('Delete Todo', { id, todos });
 	},
 
 	makeProject(projectName) {

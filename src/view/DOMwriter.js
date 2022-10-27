@@ -1,16 +1,16 @@
 import PubSub from 'pubsub-js';
-import createTaskElement from './TaskElement.js';
+import createTodoElement from './TodoElement.js';
 import createProjectElement from './ProjectElement.js';
 import { format } from 'date-fns';
 
 let isSubscribed = false;
 
-const insertTasksToMainContent = (tasks) => {
+const insertTodosToMainContent = (todos) => {
 	const mainContent = document.querySelector('#main-content');
 	mainContent.innerHTML = '';
 
-	tasks.forEach((task) => {
-		mainContent.appendChild(createTaskElement(task));
+	todos.forEach((todo) => {
+		mainContent.appendChild(createTodoElement(todo));
 	});
 };
 
@@ -18,39 +18,39 @@ const logToolbarInfo = (str) => {
 	document.querySelector('#toolbar-text').textContent = str;
 };
 
-const showAllTasks = (msg, tasks) => {
-	insertTasksToMainContent(tasks);
-	logToolbarInfo(`All > ${tasks.length} todos`);
+const showAllTodos = (msg, todos) => {
+	insertTodosToMainContent(todos);
+	logToolbarInfo(`All > ${todos.length} todos`);
 };
 
-const showTodayTasks = (msg, tasks) => {
-	insertTasksToMainContent(tasks);
-	logToolbarInfo(`Today > ${tasks.length} todos`);
+const showTodayTodos = (msg, todos) => {
+	insertTodosToMainContent(todos);
+	logToolbarInfo(`Today > ${todos.length} todos`);
 };
 
-const showThisWeekTasks = (msg, tasks) => {
-	insertTasksToMainContent(tasks);
-	logToolbarInfo(`This Week > ${tasks.length} todos`);
+const showThisWeekTodos = (msg, todos) => {
+	insertTodosToMainContent(todos);
+	logToolbarInfo(`This Week > ${todos.length} todos`);
 };
 
-const showProjectTasks = (msg, { projectName, tasks }) => {
-	insertTasksToMainContent(tasks);
-	logToolbarInfo(`Project: ${projectName} > ${tasks.length} todos`);
+const showProjectTodos = (msg, { projectName, todos }) => {
+	insertTodosToMainContent(todos);
+	logToolbarInfo(`Project: ${projectName} > ${todos.length} todos`);
 };
 
-const addNewTask = (msg, task) => {
+const addNewTodo = (msg, todo) => {
 	document
 		.querySelector('#main-content')
-		.appendChild(createTaskElement(task));
+		.appendChild(createTodoElement(todo));
 };
 
-const deleteTask = (msg, { id, tasks }) => {
-	document.querySelector('#task-' + id).remove();
+const deleteTodo = (msg, { id, todos }) => {
+	document.querySelector('#todo-' + id).remove();
 
 	const infoText = document.querySelector('#toolbar-text').textContent;
 	const a = infoText.split('>')[0];
 
-	logToolbarInfo(`${a} > ${tasks.length} todos`);
+	logToolbarInfo(`${a} > ${todos.length} todos`);
 };
 
 const addNewProject = (msg, { projectName, projectsNames }) => {
@@ -71,39 +71,39 @@ const addNewProject = (msg, { projectName, projectsNames }) => {
 	);
 };
 
-const styleTaskDependingOnIsDone = (msg, data) => {
-	const taskElement = document.querySelector('#task-' + data.id);
+const styleTodoDependingOnIsDone = (msg, data) => {
+	const todoElement = document.querySelector('#todo-' + data.id);
 
-	if (data.isDone) taskElement.classList.add('isDone');
-	else taskElement.classList.remove('isDone');
+	if (data.isDone) todoElement.classList.add('isDone');
+	else todoElement.classList.remove('isDone');
 };
 
-const showEditDialog = (msg, task) => {
+const showEditDialog = (msg, todo) => {
 	document.querySelector('#overlay').style.display = 'flex';
 
-	document.querySelector('#input-task-title').value = task.title;
-	document.querySelector('#input-task-project').value = task.projectName;
-	document.querySelector('#input-task-due_date').value = format(
-		task.dueDate,
+	document.querySelector('#input-editTodo-title').value = todo.title;
+	document.querySelector('#input-editTodo-project').value = todo.projectName;
+	document.querySelector('#input-editTodo-dueDate').value = format(
+		todo.dueDate,
 		'yyyy-MM-dd'
 	);
-	document.querySelector('#input-task-priority').value = task.priority;
-	document.querySelector('#input-task-id').value = task.id;
+	document.querySelector('#input-editTodo-priority').value = todo.priority;
+	document.querySelector('#input-editTodo-id').value = todo.id;
 };
 
 const DOMwriter = {
 	suscribe() {
 		if (isSubscribed) return;
 
-		PubSub.subscribe('Get All Tasks', showAllTasks);
-		PubSub.subscribe('Get Tasks Of Today', showTodayTasks);
-		PubSub.subscribe('Get Tasks Of This Week', showThisWeekTasks);
-		PubSub.subscribe('Get Tasks By Project', showProjectTasks);
-		PubSub.subscribe('Make Task', addNewTask);
-		PubSub.subscribe('Delete Task', deleteTask);
+		PubSub.subscribe('Get All Todos', showAllTodos);
+		PubSub.subscribe('Get Todos Of Today', showTodayTodos);
+		PubSub.subscribe('Get Todos Of This Week', showThisWeekTodos);
+		PubSub.subscribe('Get Todos By Project', showProjectTodos);
+		PubSub.subscribe('Make Todo', addNewTodo);
+		PubSub.subscribe('Delete Todo', deleteTodo);
 		PubSub.subscribe('Make Project', addNewProject);
-		PubSub.subscribe('Toggle isDone of task', styleTaskDependingOnIsDone);
-		PubSub.subscribe('Clicked Edit Button Of Task', showEditDialog);
+		PubSub.subscribe('Toggle isDone of todo', styleTodoDependingOnIsDone);
+		PubSub.subscribe('Clicked Edit Button Of Todo', showEditDialog);
 
 		isSubscribed = true;
 	},

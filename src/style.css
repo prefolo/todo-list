@@ -16,10 +16,10 @@ button {
 	--sidebar-selection-color: #fff;
 	--sidebar-border-right-color: #bde3ff;
 	--main-content-bg-color: #fff;
-	--task-shadow-color: #eee;
-	--task-high-priority-bg-color: rgb(255, 207, 144);
-	--task-medium-priority-bg-color: rgb(247, 255, 166);
-	--task-low-priority-bg-color: rgb(149, 255, 228);
+	--todo-shadow-color: #eee;
+	--todo-high-priority-bg-color: rgb(255, 207, 144);
+	--todo-medium-priority-bg-color: rgb(247, 255, 166);
+	--todo-low-priority-bg-color: rgb(149, 255, 228);
 	--footer-color: #5781ba;
 	--menu-item-icon-color: rgb(113, 164, 255);
 	--menu-item-selected-icon-color: #fff;
@@ -29,10 +29,10 @@ button {
 	--regular-button-color: #fff;
 	--regular-button-pressed-bg-color: rgb(60, 125, 171);
 	--main-content-toolbar-color: #888;
-	--task-high-border-color: rgb(255, 159, 0);
-	--task-medium-border-color: rgb(226, 226, 0);
-	--task-low-border-color: rgb(168, 215, 168);
-	--task-isDone-color: rgba(0, 0, 0, 0.5);
+	--todo-high-border-color: rgb(255, 159, 0);
+	--todo-medium-border-color: rgb(226, 226, 0);
+	--todo-low-border-color: rgb(168, 215, 168);
+	--todo-isDone-color: rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -109,10 +109,10 @@ body {
 	color: var(--projects-bar-color);
 }
 
-#projects-bar button,
 #main-content-toolbar button,
 #update-bttn,
-#cancel-bttn {
+#cancel-editTodo-bttn,
+.bx-bttns-container button {
 	border: 0;
 	background-color: var(--regular-button-bg-color);
 	padding: 2px 10px;
@@ -123,8 +123,7 @@ body {
 
 #projects-bar button:active,
 #main-content-toolbar button:active,
-#update-bttn:active,
-#cancel-bttn:active {
+.bx-bttns-container button:active {
 	background-color: var(--regular-button-pressed-bg-color);
 }
 
@@ -146,7 +145,7 @@ body {
 	text-overflow: ellipsis;
 }
 
-/* Task */
+/* Todo */
 
 #main-content {
 	padding: 20px;
@@ -170,7 +169,7 @@ body {
 	color: var(--main-content-toolbar-color);
 }
 
-.task {
+.todo {
 	display: grid;
 	grid-template-columns: 20px 1fr 150px 30px 30px;
 	gap: 7px;
@@ -178,42 +177,42 @@ body {
 	padding: 5px 10px;
 	border-radius: 5px;
 	margin-bottom: 14px;
-	box-shadow: 0 4px 4px var(--task-shadow-color);
+	box-shadow: 0 4px 4px var(--todo-shadow-color);
 	border-left: 8px solid #ccc;
 	border-right: 8px solid #ccc;
 }
 
-.task.low {
-	background-color: var(--task-low-priority-bg-color);
-	border-color: var(--task-low-border-color);
+.todo.low {
+	background-color: var(--todo-low-priority-bg-color);
+	border-color: var(--todo-low-border-color);
 }
 
-.task.medium {
-	background-color: var(--task-medium-priority-bg-color);
-	border-color: var(--task-medium-border-color);
+.todo.medium {
+	background-color: var(--todo-medium-priority-bg-color);
+	border-color: var(--todo-medium-border-color);
 }
 
-.task.high {
-	background-color: var(--task-high-priority-bg-color);
-	border-color: var(--task-high-border-color);
+.todo.high {
+	background-color: var(--todo-high-priority-bg-color);
+	border-color: var(--todo-high-border-color);
 }
 
-.task button {
+.todo button {
 	border: 0;
 	background-color: transparent;
 	height: 20px;
 	width: 20px;
 }
 
-.task-dueDate {
+.todo-dueDate {
 	font-size: 14px;
 }
 
-.task.isDone {
-	color: var(--task-isDone-color);
+.todo.isDone {
+	color: var(--todo-isDone-color);
 }
 
-.task.isDone .task-title {
+.todo.isDone .todo-title {
 	text-decoration: line-through;
 }
 
@@ -229,7 +228,7 @@ body {
 	color: var(--footer-color);
 }
 
-/* task edit box */
+/* todo edit box */
 
 #overlay {
 	display: none;
@@ -251,49 +250,59 @@ input {
 	padding: 0 6px;
 }
 
-#task-edit-bx {
+input:invalid {
+	background-color: rgb(255, 216, 216);
+}
+
+.form-bx {
 	background-color: #fff;
 	padding: 20px;
 	border-radius: 6px;
 	box-shadow: 0 4px 4px #555;
 }
 
-#task-edit-bx form {
+.form-bx form {
 	display: grid;
 	grid-template-columns: 270px;
 	gap: 6px 10px;
 	align-items: center;
 }
 
-#task-edit-bx label {
+.form-bx label {
 	color: #888;
 	letter-spacing: 1px;
 	font-size: 14px;
 	margin-top: 6px;
 }
 
-#task-edit-bx p {
+.form-bx p {
 	color: #666;
 	margin-bottom: 18px;
 	border-bottom: 1px solid #d8d8d8;
 	padding-bottom: 4px;
 }
 
-#task-edit-bx input:invalid {
-	background-color: rgb(255, 216, 216);
-}
-
-#update-bttn_container {
+.bx-bttns-container {
 	text-align: right;
 	margin-top: 28px;
 }
 
-#update-bttn,
-#cancel-bttn {
-	font-size: 14px;
+.bx-bttns-container button {
 	font-size: 12px;
 	padding: 3px 12px;
 	margin-left: 14px;
+}
+
+#newTodo-bx {
+	background-color: #20374f;
+}
+
+#newTodo-bx label {
+	color: #fff;
+}
+
+#newTodo-bx p {
+	color: #fff;
 }
 
 /* Alternative style */
@@ -307,7 +316,7 @@ header #header-title {
 	color: #fff;
 }
 
-.task {
+.todo {
 	border: 0;
 	border-bottom: 1px solid #eee;
 	background-color: transparent;
@@ -315,36 +324,36 @@ header #header-title {
 	border-radius: 0;
 }
 
-.task-title {
+.todo-title {
 	max-width: max-content;
 	padding: 2px 10px;
 	color: #fff;
 }
 
-.task.low .task-title {
+.todo.low .todo-title {
 	background-color: rgb(0, 213, 0);
 }
 
-.task.medium .task-title {
+.todo.medium .todo-title {
 	background-color: yellow;
 	color: rgb(166, 170, 29);
 }
 
-.task.high .task-title {
+.todo.high .todo-title {
 	background-color: rgb(255, 165, 0);
 }
 
-.task.low {
+.todo.low {
 	background-color: transparent;
 	border-color: #eee;
 }
 
-.task.medium {
+.todo.medium {
 	background-color: transparent;
 	border-color: #eee;
 }
 
-.task.high {
+.todo.high {
 	background-color: transparent;
 	border-color: #eee;
 }

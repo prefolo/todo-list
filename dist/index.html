@@ -49,39 +49,68 @@
 				</svg>
 				<div>This Week</div>
 			</div>
-			<div id="projects-bar">Projects <button>New</button></div>
+			<div id="projects-bar">Projects</div>
 			<span id="projects-container"> </span>
 		</nav>
 		<div id="main-content"></div>
 		<footer id="footer">Copyright © 2022 prefolo</footer>
 		<div id="overlay">
-			<div id="task-edit-bx">
+			<div id="editTodo-bx" class="form-bx">
 				<p>Edit Todo</p>
-				<form id="edit-form">
-					<label for="input-task-title">Title</label>
-					<input type="text" id="input-task-title" required />
+				<form id="editTodo-form">
+					<label for="input-editTodo-title">Title</label>
+					<input type="text" id="input-editTodo-title" required />
 
-					<label for="input-task-project">Project</label>
-					<input type="text" id="input-task-project" required list="projectsNames-datalist"/>
+					<label for="input-editTodo-project">Project</label>
+					<input type="text" id="input-editTodo-project" required list="projectsNames-datalist"/>
 					<datalist id="projectsNames-datalist">
 
 					</datalist>
 
-					<label for="input-task-due_date">Due date</label>
-					<input type="date" id="input-task-due_date" reuired />
+					<label for="input-editTodo-dueDate">Due date</label>
+					<input type="date" id="input-editTodo-dueDate" reuired />
 
-					<label for="input-task-priority">Priority</label>
-					<select id="input-task-priority">
+					<label for="input-editTodo-priority">Priority</label>
+					<select id="input-editTodo-priority">
 						<option value="low">low</option>
 						<option value="medium">medium</option>
 						<option value="high">high</option>
 					</select>
 
-					<input type="hidden" id="input-task-id" />
+					<input type="hidden" id="input-editTodo-id" />
 				</form>
-				<div id="update-bttn_container">
-					<button id="cancel-bttn">Cancel</button>
-					<button id="update-bttn" type="submit" form="edit-form">Update</button>
+				<div class="bx-bttns-container">
+					<button id="cancel-editTodo-bttn">Cancel</button>
+					<button id="update-bttn" type="submit" form="editTodo-form">Update</button>
+				</div>
+			</div>
+			<div id="newTodo-bx" class="form-bx">
+				<p>New Todo</p>
+				<form id="newTodo-form">
+					<label for="input-newTodo-title">Title</label>
+					<input type="text" id="input-newTodo-title" required />
+
+					<label for="input-newTodo-project">Project</label>
+					<input type="text" id="input-newTodo-project" required list="projectsNames-datalist"/>
+					<datalist id="projectsNames-datalist">
+
+					</datalist>
+
+					<label for="input-newTodo-dueDate">Due date</label>
+					<input type="date" id="input-newTodo-dueDate" reuired />
+
+					<label for="input-newTodo-priority">Priority</label>
+					<select id="input-newTodo-priority">
+						<option value="low">low</option>
+						<option value="medium">medium</option>
+						<option value="high">high</option>
+					</select>
+
+					<input type="hidden" id="input-newTodo-id" />
+				</form>
+				<div class="bx-bttns-container">
+					<button id="cancel-newTodo-bttn">Cancel</button>
+					<button id="save-bttn" type="submit" form="newTodo-form">Save</button>
 				</div>
 			</div>
 		</div>

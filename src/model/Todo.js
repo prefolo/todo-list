@@ -2,7 +2,7 @@ import PubSub from 'pubsub-js';
 
 let theID = 0;
 
-function createTask(title, dueDate, priority, projectName, isDone = false) {
+function createTodo(title, dueDate, priority, projectName, isDone = false) {
 	const id = theID;
 	theID++;
 
@@ -18,9 +18,9 @@ function createTask(title, dueDate, priority, projectName, isDone = false) {
 			this.isDone = !this.isDone;
 			const isDone = this.isDone;
 
-			PubSub.publish('Toggle isDone of task', { id, isDone });
+			PubSub.publish('Toggle isDone of todo', { id, isDone });
 		},
 	};
 }
 
-export default createTask;
+export default createTodo;
