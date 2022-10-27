@@ -279,6 +279,10 @@ input {
 	padding-bottom: 4px;
 }
 
+#task-edit-bx input:invalid {
+	background-color: rgb(255, 216, 216);
+}
+
 #update-bttn_container {
 	text-align: right;
 	margin-top: 28px;
@@ -290,4 +294,57 @@ input {
 	font-size: 12px;
 	padding: 3px 12px;
 	margin-left: 14px;
+}
+
+/* Alternative style */
+
+header {
+	background-color: #43505d;
+	color: #fff;
+}
+
+header #header-title {
+	color: #fff;
+}
+
+.task {
+	border: 0;
+	border-bottom: 1px solid #eee;
+	background-color: transparent;
+	box-shadow: none;
+	border-radius: 0;
+}
+
+.task-title {
+	max-width: max-content;
+	padding: 2px 10px;
+	color: #fff;
+}
+
+.task.low .task-title {
+	background-color: rgb(0, 213, 0);
+}
+
+.task.medium .task-title {
+	background-color: yellow;
+	color: rgb(166, 170, 29);
+}
+
+.task.high .task-title {
+	background-color: rgb(255, 165, 0);
+}
+
+.task.low {
+	background-color: transparent;
+	border-color: #eee;
+}
+
+.task.medium {
+	background-color: transparent;
+	border-color: #eee;
+}
+
+.task.high {
+	background-color: transparent;
+	border-color: #eee;
 }

@@ -71,6 +71,8 @@ document.querySelector('#update-bttn').addEventListener('click', function (e) {
 	const priority = document.querySelector('#input-task-priority').value;
 	const projectName = document.querySelector('#input-task-project').value;
 
+	if (!(title && projectName)) return;
+
 	TodoList.updateTask(id, title, dueDate, priority, projectName);
 
 	document.querySelector('#overlay').style.display = 'none';
