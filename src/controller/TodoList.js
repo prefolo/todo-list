@@ -5,6 +5,7 @@ import { isToday, isThisWeek } from 'date-fns';
 const tasks = [];
 const projectsNames = [];
 let isSubscribed = false;
+let currentList = 'all';
 
 const TodoList = {
 	subscribe() {
@@ -22,11 +23,14 @@ const TodoList = {
 	},
 
 	getAll() {
+		currentList = 'all';
 		PubSub.publish('Get All Tasks', tasks);
 		return tasks;
 	},
 
 	getByProject(projectName) {
+		currentList = projectName;
+
 		const filtered = tasks.filter(
 			(task) => task.projectName == projectName
 		);
@@ -36,6 +40,7 @@ const TodoList = {
 	},
 
 	getToday() {
+		currentList = 'today';
 		const filtered = tasks.filter((task) => isToday(task.dueDate));
 
 		PubSub.publish('Get Tasks Of Today', filtered);
@@ -43,6 +48,7 @@ const TodoList = {
 	},
 
 	getThisWeek() {
+		currentList = 'thisWeek';
 		const filtered = tasks.filter((task) => isThisWeek(task.dueDate));
 
 		PubSub.publish('Get Tasks Of This Week', filtered);
@@ -68,6 +74,40 @@ const TodoList = {
 		return task;
 	},
 
+	updateTask(id, title, dueDate, priority, projectName) {
+		console.log({ id, title, dueDate, priority, projectName });
+		const task = this.getByID(id);
+
+		task.title = title;
+		task.dueDate = new Date(dueDate);
+		task.priority = priority;
+		task.projectName = projectName;
+
+		this.makeProject(projectName);
+
+		this.updateList();
+	},
+
+	updateList() {
+		switch (currentList) {
+			case 'all':
+				this.getAll();
+				break;
+
+			case 'today':
+				this.getToday();
+				break;
+
+			case 'thisWeek':
+				this.getThisWeek();
+				break;
+
+			default:
+				this.getByProject(currentList);
+				break;
+		}
+	},
+
 	deleteTask(id) {
 		const task = tasks.filter((task) => task.id == id)[0];
 		const index = tasks.indexOf(task);
@@ -80,7 +120,7 @@ const TodoList = {
 	makeProject(projectName) {
 		if (!projectsNames.includes(projectName)) {
 			projectsNames.push(projectName);
-			PubSub.publish('Make Project', projectName);
+			PubSub.publish('Make Project', { projectName, projectsNames });
 		}
 	},
 };

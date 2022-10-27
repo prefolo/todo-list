@@ -52,3 +52,26 @@ document.querySelectorAll('.menu-item').forEach((item) =>
 		DOMwriter.selectMenuItem(this);
 	})
 );
+
+/* edit task box */
+
+document
+	.querySelector('#cancel-bttn')
+	.addEventListener(
+		'click',
+		() => (document.querySelector('#overlay').style.display = 'none')
+	);
+
+document.querySelector('#update-bttn').addEventListener('click', function (e) {
+	e.preventDefault();
+
+	const id = document.querySelector('#input-task-id').value;
+	const title = document.querySelector('#input-task-title').value;
+	const dueDate = document.querySelector('#input-task-due_date').value;
+	const priority = document.querySelector('#input-task-priority').value;
+	const projectName = document.querySelector('#input-task-project').value;
+
+	TodoList.updateTask(id, title, dueDate, priority, projectName);
+
+	document.querySelector('#overlay').style.display = 'none';
+});

@@ -1,10 +1,12 @@
 import PubSub from 'pubsub-js';
 import createTaskElement from './TaskElement.js';
 import createProjectElement from './ProjectElement.js';
+import { format } from 'date-fns';
 
 let isSubscribed = false;
 
 const showTasks = (msg, tasks) => {
+	console.log('showTasks', tasks);
 	const mainContent = document.querySelector('#main-content');
 	mainContent.innerHTML = '';
 
@@ -27,7 +29,8 @@ const deleteTask = (msg, id) => {
 	document.querySelector('#task-' + id).remove();
 };
 
-const addNewProject = (msg, projectName) => {
+const addNewProject = (msg, { projectName, projectsNames }) => {
+	console.log({ projectName, projectsNames });
 	const element = createProjectElement(projectName);
 
 	document.querySelector('#projects-container').appendChild(element);
@@ -36,6 +39,12 @@ const addNewProject = (msg, projectName) => {
 		DOMwriter.selectMenuItem(this);
 		PubSub.publish('Clicked Project Menu Item', projectName);
 	});
+
+	const dataList = document.querySelector('#projectsNames-datalist');
+	dataList.innerHTML = '';
+	projectsNames.forEach(
+		(name) => (dataList.innerHTML += `<option value="${name}">`)
+	);
 };
 
 const styleTaskDependingOnIsDone = (msg, data) => {
@@ -43,6 +52,19 @@ const styleTaskDependingOnIsDone = (msg, data) => {
 
 	if (data.isDone) taskElement.classList.add('isDone');
 	else taskElement.classList.remove('isDone');
+};
+
+const showEditDialog = (msg, task) => {
+	document.querySelector('#overlay').style.display = 'flex';
+
+	document.querySelector('#input-task-title').value = task.title;
+	document.querySelector('#input-task-project').value = task.projectName;
+	document.querySelector('#input-task-due_date').value = format(
+		task.dueDate,
+		'yyyy-MM-dd'
+	);
+	document.querySelector('#input-task-priority').value = task.priority;
+	document.querySelector('#input-task-id').value = task.id;
 };
 
 const DOMwriter = {
@@ -58,6 +80,7 @@ const DOMwriter = {
 		PubSub.subscribe('Delete Task', deleteTask);
 		PubSub.subscribe('Make Project', addNewProject);
 		PubSub.subscribe('Toggle isDone of task', styleTaskDependingOnIsDone);
+		PubSub.subscribe('Clicked Edit Button Of Task', showEditDialog);
 
 		isSubscribed = true;
 	},
