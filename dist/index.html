@@ -56,7 +56,10 @@
 		<footer id="footer">Copyright © 2022 prefolo</footer>
 		<div id="overlay">
 			<div id="editTodo-bx" class="form-bx">
-				<p>Edit Todo</p>
+				<p><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+					<path fill="currentColor"
+						d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+				</svg>Edit Todo</p>
 				<form id="editTodo-form">
 					<label for="input-editTodo-title">Title</label>
 					<input type="text" id="input-editTodo-title" required />
@@ -85,7 +88,10 @@
 				</div>
 			</div>
 			<div id="newTodo-bx" class="form-bx">
-				<p>New Todo</p>
+				<p><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+					<path fill="currentColor"
+						d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+				</svg>New Todo</p>
 				<form id="newTodo-form">
 					<label for="input-newTodo-title">Title</label>
 					<input type="text" id="input-newTodo-title" required />
@@ -108,9 +114,9 @@
 
 					<input type="hidden" id="input-newTodo-id" />
 				</form>
-				<div class="bx-bttns-container">
-					<button id="cancel-newTodo-bttn">Cancel</button>
+				<div class="bx-newTodo-bttns-container">
 					<button id="save-bttn" type="submit" form="newTodo-form">Save</button>
+					<button id="cancel-newTodo-bttn">Cancel</button>
 				</div>
 			</div>
 		</div>

@@ -280,6 +280,9 @@ input:invalid {
 	margin-bottom: 18px;
 	border-bottom: 1px solid #d8d8d8;
 	padding-bottom: 4px;
+	display: flex;
+	gap: 6px;
+	align-items: center;
 }
 
 .bx-bttns-container {
@@ -293,6 +296,26 @@ input:invalid {
 	margin-left: 14px;
 }
 
+.bx-newTodo-bttns-container {
+	margin-top: 28px;
+}
+
+.bx-newTodo-bttns-container button {
+	font-size: 12px;
+	padding: 8px 12px;
+	width: 100%;
+	border-radius: 5px;
+	border: 0;
+}
+
+#save-bttn {
+	background-color: yellow;
+	margin-bottom: 10px;
+}
+#cancel-newTodo-bttn {
+	background-color: rgb(192, 192, 192);
+}
+
 #newTodo-bx {
 	background-color: #20374f;
 }
@@ -303,6 +326,8 @@ input:invalid {
 
 #newTodo-bx p {
 	color: #fff;
+	justify-content: center;
+	border-bottom: 1px solid #2b4660;
 }
 
 /* Alternative style */
@@ -356,4 +381,9 @@ header #header-title {
 .todo.high {
 	background-color: transparent;
 	border-color: #eee;
+}
+
+.menu-item {
+	margin: 0 9px;
+	border-radius: 4px;
 }
