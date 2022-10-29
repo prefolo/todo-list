@@ -259,6 +259,7 @@ input:invalid {
 	padding: 20px;
 	border-radius: 6px;
 	box-shadow: 0 4px 4px #555;
+	display: none;
 }
 
 .form-bx form {
@@ -295,6 +296,8 @@ input:invalid {
 	padding: 3px 12px;
 	margin-left: 14px;
 }
+
+/* new todo box */
 
 .bx-newTodo-bttns-container {
 	margin-top: 28px;

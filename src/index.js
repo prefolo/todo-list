@@ -57,10 +57,7 @@ document.querySelectorAll('.menu-item').forEach((item) =>
 
 document
 	.querySelector('#cancel-editTodo-bttn')
-	.addEventListener(
-		'click',
-		() => (document.querySelector('#overlay').style.display = 'none')
-	);
+	.addEventListener('click', () => dismissDialogBoxes());
 
 document.querySelector('#update-bttn').addEventListener('click', function (e) {
 	e.preventDefault();
@@ -75,5 +72,41 @@ document.querySelector('#update-bttn').addEventListener('click', function (e) {
 
 	TodoList.updateTodo(id, title, dueDate, priority, projectName);
 
-	document.querySelector('#overlay').style.display = 'none';
+	dismissDialogBoxes();
 });
+
+/* new todo box */
+document.querySelector('#newTodo-bttn').addEventListener('click', () => {
+	document.querySelector('#overlay').style.display = 'flex';
+	document.querySelector('#newTodo-bx').style.display = 'block';
+
+	document.querySelector('#input-newTodo-title').value = '';
+	document.querySelector('#input-newTodo-project').value = '';
+	document.querySelector('#input-newTodo-dueDate').value = '';
+	document.querySelector('#input-newTodo-priority').value = 'low';
+});
+
+document
+	.querySelector('#cancel-newTodo-bttn')
+	.addEventListener('click', () => dismissDialogBoxes());
+
+document.querySelector('#save-bttn').addEventListener('click', function (e) {
+	e.preventDefault();
+
+	const title = document.querySelector('#input-newTodo-title').value;
+	const dueDate = document.querySelector('#input-newTodo-dueDate').value;
+	const priority = document.querySelector('#input-newTodo-priority').value;
+	const projectName = document.querySelector('#input-newTodo-project').value;
+
+	if (!(title && projectName)) return;
+
+	TodoList.makeTodo(title, dueDate, priority, projectName);
+
+	dismissDialogBoxes();
+});
+
+const dismissDialogBoxes = () => {
+	document.querySelector('#overlay').style.display = 'none';
+	document.querySelector('#editTodo-bx').style.display = 'none';
+	document.querySelector('#newTodo-bx').style.display = 'none';
+};

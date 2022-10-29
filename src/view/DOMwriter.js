@@ -80,6 +80,7 @@ const styleTodoDependingOnIsDone = (msg, data) => {
 
 const showEditDialog = (msg, todo) => {
 	document.querySelector('#overlay').style.display = 'flex';
+	document.querySelector('#editTodo-bx').style.display = 'block';
 
 	document.querySelector('#input-editTodo-title').value = todo.title;
 	document.querySelector('#input-editTodo-project').value = todo.projectName;
