@@ -356,6 +356,7 @@ header #header-title {
 	max-width: max-content;
 	padding: 2px 10px;
 	color: #fff;
+	border-radius: 4px;
 }
 
 .todo.low .todo-title {
@@ -368,7 +369,7 @@ header #header-title {
 }
 
 .todo.high .todo-title {
-	background-color: rgb(255, 165, 0);
+	background-color: red;
 }
 
 .todo.low {
