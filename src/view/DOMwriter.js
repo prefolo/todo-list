@@ -64,10 +64,18 @@ const addNewProject = (msg, { projectName, projectsNames }) => {
 		PubSub.publish('Clicked Project Menu Item', projectName);
 	});
 
-	const dataList = document.querySelector('#projectsNames-datalist');
+	// Populate menu with the list of project names options
+	const dataList = document.querySelector('#editForm-projectsNames-datalist');
 	dataList.innerHTML = '';
 	projectsNames.forEach(
 		(name) => (dataList.innerHTML += `<option value="${name}">`)
+	);
+
+	// Populate menu with the list of project names options
+	const dataListB = document.querySelector('#newForm-projectsNames-datalist');
+	dataListB.innerHTML = '';
+	projectsNames.forEach(
+		(name) => (dataListB.innerHTML += `<option value="${name}">`)
 	);
 };
 
