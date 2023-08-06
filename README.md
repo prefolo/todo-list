@@ -7,7 +7,7 @@ This is my Todo list in vanilla javascript.
 - Clone the file to your computer
 
 ```bash
-https://github.com/prefolo/todo-list.git
+git clone https://github.com/prefolo/todo-list.git
 ```
 
 - Enter the repository directory
