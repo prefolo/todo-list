@@ -34,4 +34,4 @@ npm run build
 npm run start
 ```
 
-- The site will open at [http://localhost:8080](http://localhost:8080) into your browser.
+The site will open at [http://localhost:8080](http://localhost:8080) into your browser.
